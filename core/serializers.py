@@ -1,7 +1,7 @@
 # core/serializers.py
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import UploadedFile
+from .models import UploadedFile, Slide
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,3 +17,9 @@ class UploadedFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UploadedFile
         fields = ('id', 'file', 'uploaded_at')
+
+class SlideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Slide
+        fields = ('id', 'title', 'content', 'created_at', 'updated_at', 'user')
+        read_only_fields = ('user',)

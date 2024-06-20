@@ -1,6 +1,7 @@
+# edukator/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from core.views import UserCreateView, home, LogoutView, GetCSRFToken, FileUploadView
+from core.views import UserCreateView, home, LogoutView, GetCSRFToken, FileUploadView, SlideListCreateView, SlideDetailView
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -12,4 +13,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('api/', include('rest_framework.urls')),
     path('api/upload/', FileUploadView.as_view(), name='file-upload'),
+    path('api/slides/', SlideListCreateView.as_view(), name='slide-list-create'),
+    path('api/slides/<int:pk>/', SlideDetailView.as_view(), name='slide-detail'),
 ]

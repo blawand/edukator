@@ -1,10 +1,14 @@
-from decouple import config
 from pathlib import Path
+from decouple import config
+
+# Retrieve DEBUG value from .env and convert it to boolean
+DEBUG_VALUE = config('DEBUG', default='False')
+DEBUG = DEBUG_VALUE.lower() == 'true'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -15,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken', 
+    'rest_framework.authtoken',
     'corsheaders',
     'core',
 ]
@@ -87,7 +91,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Add this line at the end of the file
 AUTH_USER_MODEL = 'core.User'
 
 REST_FRAMEWORK = {
@@ -100,3 +103,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
+# Google API settings
+GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET')
+GOOGLE_REDIRECT_URI = config('GOOGLE_REDIRECT_URI')
