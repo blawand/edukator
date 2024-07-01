@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from core.views import UserCreateView, home, LogoutView, GetCSRFToken, FileUploadView
+from core.views import UserCreateView, home, LogoutView, GetCSRFToken, FileUploadView, create_quick_slides
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -12,4 +12,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('api/', include('rest_framework.urls')),
     path('api/upload/', FileUploadView.as_view(), name='file-upload'),
+    path('create-quick-slides/', create_quick_slides, name='create_quick_slides'),
+    path('accounts/', include('allauth.urls')),  # Add this line for allauth URLs
 ]

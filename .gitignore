@@ -22,3 +22,7 @@ db.sqlite3
 
 # macOS
 .DS_Store
+
+# Configuration files
+config/credentials.json
+config/token.json
