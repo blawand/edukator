@@ -26,3 +26,6 @@ db.sqlite3
 # Configuration files
 config/credentials.json
 config/token.json
+
+# Uploads
+/uploads/
