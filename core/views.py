@@ -1,6 +1,6 @@
+# core/views.py
 from django.http import HttpResponse
-from rest_framework import generics
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework import generics, permissions
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -21,11 +21,11 @@ def home(request):
 class UserCreateView(generics.CreateAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [permissions.AllowAny]
 
 # Logout view
 class LogoutView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
         request.auth.delete()
@@ -33,7 +33,7 @@ class LogoutView(APIView):
 
 # CSRF token view
 class GetCSRFToken(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [permissions.AllowAny]
 
     def get(self, request):
         token = get_token(request)
